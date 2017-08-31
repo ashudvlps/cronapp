@@ -10,12 +10,11 @@ api = tweepy.API(auth)
 # for tweet in public_tweets:
 #     print(tweet.text+'\n')
 # Iterate through the first 200 statuses in the friends timeline
-
-for s in tweepy.Cursor(api.user_timeline, id='republic').items(20000):
-    with open('output.csv', 'w') as f:
-        writer = csv.writer(f)
-        h = []
-        for i in range(0, len(s.entities.get('hashtags'))):
-            h.append(s.entities.get('hashtags')[i].get('text'))
-        writer.writerow([s.id, s.text, ','.join(h)])
+f = open('output1.csv','w')
+for s in tweepy.Cursor(api.user_timeline, id='republic').items(22089):
+    writer = csv.writer(f)
+    h = []
+    for i in range(0, len(s.entities.get('hashtags'))):
+        h.append(s.entities.get('hashtags')[i].get('text'))
+    writer.writerow([s.id, s.text.replace('\n',''), ','.join(h)])
     # print(s.id, s.text, s.entities.get('hashtags')[0].get('text'))
